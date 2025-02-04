@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Kanban using IndexedDB</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+	</head>
+	<body class="bg-gray-900 text-white box-border">
+		<div class="container mx-auto my-12">
+			<div>
+				<input
+					type="text"
+					name="task"
+					id="task"
+					class="bg-gray-600 text-white"
+				/>
+				<input id="add-task" type="button" value="Add Task" />
+			</div>
+			<section id="kanban" class="grid grid-cols-4 gap-2 my-5">
+				<section id="kanban-todo" class="bg-gray-800 rounded-xl p-3">
+					<h3 class="text-center text-xl mb-3">Todo</h3>
+					<hr class="border-gray-600" />
+					<div
+						class="dropzone mt-2 rounded-xl grid auto-rows-min"
+					></div>
+				</section>
+				<section
+					id="kanban-inprogress"
+					class="bg-gray-800 rounded-xl p-3"
+				>
+					<h3 class="text-center text-xl mb-3">Inprogress</h3>
+					<hr class="border-gray-600" />
+					<div
+						class="dropzone mt-2 min-h-full rounded-xl grid auto-rows-min"
+					></div>
+				</section>
+				<section
+					id="kanban-completed"
+					class="bg-gray-800 rounded-xl p-3"
+				>
+					<h3 class="text-center text-xl mb-3">Completed</h3>
+					<hr class="border-gray-600" />
+					<div
+						class="dropzone mt-2 min-h-full rounded-xl grid auto-rows-min"
+					></div>
+				</section>
+				<section id="kanban-dropped" class="bg-gray-800 rounded-xl p-3">
+					<h3 class="text-center text-xl mb-3">Dropped</h3>
+					<hr class="border-gray-600" />
+					<div
+						class="dropzone mt-2 min-h-full rounded-xl grid auto-rows-min"
+					></div>
+				</section>
+			</section>
+		</div>
+		<script type="module" src="index.mjs"></script>
+	</body>
+</html>

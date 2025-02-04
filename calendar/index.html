@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Calendar</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+	</head>
+	<body class="bg-gray-900 text-white my-3">
+		<div class="container mx-auto px-3">
+			<div
+				id="time-grid"
+				class="bg-gray-800 rounded-lg p-3 grid grid-cols-[max-content_1fr] gap-3"
+			>
+				<div id="times" class="grid gap-14 items-center text-mg"></div>
+				<div id="timeline" class="grid gap-14 items-center relative">
+					<div
+						id="meetings"
+						class="grid absolute top-0 grid-rows-[repeat(48,2.5rem)] mt-3 w-full"
+					></div>
+				</div>
+			</div>
+		</div>
+		<script type="module" src="index.mjs"></script>
+	</body>
+</html>
