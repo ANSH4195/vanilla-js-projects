@@ -1,5 +1,5 @@
-import { updateProductsList } from './domHelpers.mjs';
-import { fetchNextPage } from './service.mjs';
+import { updateProductsList } from "./domHelpers.mjs";
+import { fetchNextPage } from "./service.mjs";
 
 const handleSentinelTrigger = (entries, observer) => {
 	for (const entry of entries) {
@@ -8,15 +8,16 @@ const handleSentinelTrigger = (entries, observer) => {
 			fetchNextPage({}).then(({ products }) =>
 				requestAnimationFrame(() => {
 					updateProductsList({ products });
-					const domProducts = document.querySelectorAll('.product');
-					observer.observe(domProducts[domProducts.length - 5]);
-				})
+					const productsList =
+						document.getElementById("products-wrapper").children;
+					observer.observe(productsList[productsList.length - 5]);
+				}),
 			);
 		}
 	}
 };
 
 export const observer = new IntersectionObserver(handleSentinelTrigger, {
-	rootMargin: '20px',
+	rootMargin: "20px",
 	threshold: 0.5,
 });

@@ -1,24 +1,23 @@
-import { createProductCard, updateProductsList } from './domHelpers.mjs';
-import { observer } from './infiniteScroll.mjs';
-import { getStore, listProducts } from './service.mjs';
-import { useDebouncedCallback } from './utils.mjs';
+import { createProductCard, updateProductsList } from "./domHelpers.mjs";
+import { observer } from "./infiniteScroll.mjs";
+import { getStore, listProducts } from "./service.mjs";
+import { useDebouncedCallback } from "./utils.mjs";
 
 const PRODUCTS_PER_ROW = 4;
+const productWrapperSelector = document.getElementById("products-wrapper");
 const getWindowSize = () => window.innerHeight;
+const getProducts = () => document.querySelectorAll(".product");
 
 listProducts({}).then(({ products }) =>
 	requestAnimationFrame(() => {
 		updateProductsList({ products });
-		const domProducts = document.querySelectorAll('.product');
-		observer.observe(domProducts[domProducts.length - 5]);
-	})
+		const productList = productWrapperSelector.children;
+		observer.observe(productList[productList.length - 5]);
+	}),
 );
 
-const getProducts = () => document.querySelectorAll('.product');
-
-const productsList = document.getElementById('products-wrapper');
 const debouncedScrollHandler = useDebouncedCallback(() => {
-	const scrollYPosition = productsList.scrollTop;
+	const scrollYPosition = productWrapperSelector.scrollTop;
 	const heightPerElement = getProducts()[0].offsetHeight;
 	const visibleRows = {
 		start: Math.floor(scrollYPosition / heightPerElement),
@@ -28,7 +27,7 @@ const debouncedScrollHandler = useDebouncedCallback(() => {
 	requestAnimationFrame(() => {
 		for (let i = 0; i < visibleRows.start * PRODUCTS_PER_ROW; i++) {
 			allProducts[i].classList.add(`h-[${heightPerElement}px]`);
-			allProducts[i].innerHTML = '';
+			allProducts[i].innerHTML = "";
 		}
 	});
 	requestAnimationFrame(() => {
@@ -39,7 +38,7 @@ const debouncedScrollHandler = useDebouncedCallback(() => {
 		) {
 			allProducts[i].classList.remove(`h-[${heightPerElement}px]`);
 			allProducts[i].innerHTML = createProductCard(
-				getStore().products[i]
+				getStore().products[i],
 			).innerHTML;
 		}
 	});
@@ -50,9 +49,9 @@ const debouncedScrollHandler = useDebouncedCallback(() => {
 			i++
 		) {
 			allProducts[i].classList.add(`h-[${heightPerElement}px]`);
-			allProducts[i].innerHTML = '';
+			allProducts[i].innerHTML = "";
 		}
 	});
 });
 
-productsList.addEventListener('scroll', debouncedScrollHandler);
+productWrapperSelector.addEventListener("scroll", debouncedScrollHandler);
